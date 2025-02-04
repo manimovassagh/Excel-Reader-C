@@ -80,16 +80,10 @@ class ExcelSearchReplace
 
     static void Main()
     {
-        string filePath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "data.xlsx");    
-        if (!File.Exists(filePath))
-        {
-            Console.WriteLine($"File not found: {filePath}");
-            return;
-        }
-
+        string filePath = "/Users/mani/Documents/Projects/noter/ConsoleApp1/ConsoleApp1/data.xlsx";
         var replacements = new Dictionary<string, string>
         {
-            { "OldText1", "NewText1" },
+            { "NewText1", "yes baby" },
             { "OldText2", "NewText2" },
             { "FindMe", "ReplacedValue" }
         };
