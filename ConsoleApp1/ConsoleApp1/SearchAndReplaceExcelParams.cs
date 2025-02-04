@@ -1,10 +1,10 @@
-﻿using NPOI.SS.UserModel;
+﻿using System.Globalization;
+using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-using System;
-using System.Collections.Generic;
-using System.IO;
 
-class ExcelSearchReplace
+namespace ConsoleApp1;
+
+class SearchAndReplaceExcelParams
 {
     public static void SearchAndReplace(string filePath, Dictionary<string, string> replacements)
     {
@@ -26,7 +26,7 @@ class ExcelSearchReplace
 
                 for (int colIndex = 0; colIndex < row.LastCellNum; colIndex++)
                 {
-                    ICell cell = row.GetCell(colIndex);
+                    ICell? cell = row.GetCell(colIndex);
                     if (cell == null) continue;
 
                     string cellValue = GetCellValueAsString(cell).Trim();
@@ -62,14 +62,14 @@ class ExcelSearchReplace
         }
     }
 
-    private static string GetCellValueAsString(ICell cell)
+    private static string GetCellValueAsString(ICell? cell)
     {
         if (cell == null) return string.Empty;
 
         string value = cell.CellType switch
         {
             CellType.String => cell.StringCellValue ?? string.Empty,
-            CellType.Numeric => cell.NumericCellValue.ToString(),
+            CellType.Numeric => cell.NumericCellValue.ToString(CultureInfo.InvariantCulture),
             CellType.Boolean => cell.BooleanCellValue.ToString(),
             CellType.Formula => cell.CellFormula ?? string.Empty,
             _ => string.Empty
@@ -83,7 +83,7 @@ class ExcelSearchReplace
         string filePath = "/Users/mani/Documents/Projects/noter/ConsoleApp1/ConsoleApp1/data.xlsx";
         var replacements = new Dictionary<string, string>
         {
-            { "NewText1", "yes baby" },
+            { "yes Baby", "yes Babe" },
             { "OldText2", "NewText2" },
             { "FindMe", "ReplacedValue" }
         };
