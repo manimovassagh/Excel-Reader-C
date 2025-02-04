@@ -14,7 +14,7 @@ class SearchAndReplaceExcelParams
             workbook = new XSSFWorkbook(fileStream);
         }
 
-        try 
+        try
         {
             ISheet sheet = workbook.GetSheetAt(0);
             bool isModified = false;
@@ -35,7 +35,8 @@ class SearchAndReplaceExcelParams
                     {
                         if (string.Equals(cellValue, entry.Key, StringComparison.OrdinalIgnoreCase))
                         {
-                            Console.WriteLine($"Replacing '{cellValue}' with '{entry.Value}' at [{rowIndex}, {colIndex}]");
+                            Console.WriteLine(
+                                $"Replacing '{cellValue}' with '{entry.Value}' at [{rowIndex}, {colIndex}]");
                             cell.SetCellValue(entry.Value);
                             isModified = true;
                         }
@@ -49,6 +50,7 @@ class SearchAndReplaceExcelParams
                 {
                     workbook.Write(outputStream);
                 }
+
                 Console.WriteLine("✅ Excel file updated successfully!");
             }
             else
@@ -83,7 +85,7 @@ class SearchAndReplaceExcelParams
         string filePath = "/Users/mani/Documents/Projects/noter/ConsoleApp1/ConsoleApp1/data.xlsx";
         var replacements = new Dictionary<string, string>
         {
-            { "yes Baby", "yes Babe" },
+            { "ja Baby", "Ja Baby" },
             { "OldText2", "NewText2" },
             { "FindMe", "ReplacedValue" }
         };
